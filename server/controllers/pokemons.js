@@ -6,16 +6,21 @@ const router = module.exports = express.Router();
 
 // index
 router.get('/', (req, res) => {
-  console.log('hello');
   Pokemon.find().exec((err, pokemons) => {
-    console.log('POKEMON:', pokemons);
     res.send({ pokemons });
   });
 });
 
+// create
 router.post('/', (req, res) => {
-  const pokemon = new Pokemon(req.body);
-  pokemon.save(() => {
+  Pokemon.create(req.body, (err, pokemon) => {
     res.send({ pokemon });
   });
 });
+
+// router.post('/', (req, res) => {
+//   const pokemon = new Pokemon(req.body);
+//   pokemon.save(() => {
+//     res.send({ pokemon });
+//   });
+// });

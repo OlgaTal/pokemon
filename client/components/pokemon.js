@@ -23,9 +23,11 @@ export default class Pokemon extends React.Component {
     const pokemonname = this.refs.pokemonname.value;
     const imageurl = this.refs.imageurl.value;
     axios.post('/api/pokemon', { pokemonname, imageurl })
-    .then(() => {
-      // this.setState({ errors: [] });
+    .then((rsp) => {
       this.setState({ errors: [], pokemons: [...this.state.pokemon, rsp.data.pokemon] });
+    });
+    // .then(() => {
+    //   // this.setState({ errors: [] });
     // })
     // .then(() => {
     //   return axios.get('/api/pokemon');
@@ -35,7 +37,7 @@ export default class Pokemon extends React.Component {
     // })
     // .catch(err => {
     //   this.setState({ errors: JSON.parse(err.response.data).messages });
-    });
+    // });
   }
 
   render() {
