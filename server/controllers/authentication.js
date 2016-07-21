@@ -19,10 +19,7 @@ router.post('/register', (req, res) => {
 // login
 router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
   console.log('login request', req.body);
-  // User.create(req.body, (err, user) => {
-  //   if (!user) {
-  //     return res.status(400).send();
-  //   }
-  res.status(200).send({ payload: req.user });
+  const token = req.user.token();
+  res.status(200).send({ token });
   // });
 });

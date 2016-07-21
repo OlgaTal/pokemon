@@ -12,7 +12,8 @@ export default class Pokemon extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/pokemon')
+    const authorization = `JWT ${localStorage.getItem('token')}`;
+    axios.get('/api/pokemon', { headers: { authorization } })
     .then((rsp) => {
       this.setState({ pokemons: rsp.data.pokemons });
     });
@@ -22,22 +23,11 @@ export default class Pokemon extends React.Component {
     e.preventDefault();
     const pokemonname = this.refs.pokemonname.value;
     const imageurl = this.refs.imageurl.value;
-    axios.post('/api/pokemon', { pokemonname, imageurl })
+    const authorization = `JWT ${localStorage.getItem('token')}`;
+    axios.post('/api/pokemon', { headers: { authorization } }, { pokemonname, imageurl })
     .then((rsp) => {
       this.setState({ errors: [], pokemons: [...this.state.pokemon, rsp.data.pokemon] });
     });
-    // .then(() => {
-    //   // this.setState({ errors: [] });
-    // })
-    // .then(() => {
-    //   return axios.get('/api/pokemon');
-    // })
-    // .then((rsp) => {
-    //   this.setState({ pokemons: rsp.data.pokemons });
-    // })
-    // .catch(err => {
-    //   this.setState({ errors: JSON.parse(err.response.data).messages });
-    // });
   }
 
   render() {

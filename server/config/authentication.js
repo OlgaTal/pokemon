@@ -19,17 +19,21 @@ passport.use(new LocalStrategy({
   }
 ));
 
-// passport.use(new LocalStrategy(
-//   (email, password, done) => {
-//     User.findOne({ email }, (err, user) => {
-//       if (err) { return done(err); }
-//       if (!user) {
-//         return done(null, false, { message: 'Incorrect email.' });
-//       }
-//       if (!user.validPassword(password)) {
-//         return done(null, false, { message: 'Incorrect password.' });
-//       }
-//       return done(null, user);
-//     });
-//   }
-// ));
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+opts.secretOrKey = process.env.SECRET;
+
+passport.use(new JwtStrategy(opts, (jwt, done) => {
+  User.findById(jwt.sub).populate('pokemon').exec((err, user) => {
+    if (err) {
+      return done(err, false);
+    }
+    if (!user) {
+      return done(null, false);
+    }
+
+    return done(null, user);
+  });
+}));
