@@ -13,7 +13,7 @@ export default () => (
           <span className="icon-bar"></span>
           <span className="icon-bar"></span>
         </button>
-        <a className="navbar-brand" href="#">ChangeMe</a>
+        <a className="navbar-brand" href="#">Pokemon</a>
       </div>
 
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -21,8 +21,7 @@ export default () => (
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li><Link to="/"><i className="fa fa-home fa-fw"></i> Home</Link></li>
-          <li><Link to="/about"><i className="fa fa-hashtag fa-fw"></i> About</Link></li>
-          <li><Link to="/faq"><i className="fa fa-question-circle-o fa-fw"></i> Faq</Link></li>
+          <li><Link to="/pokemon"><i className="fa fa-hashtag fa-fw"></i> Pokemon</Link></li>
         </ul>
       </div>
     </div>

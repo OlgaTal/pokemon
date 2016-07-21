@@ -1,0 +1,6 @@
+.git/
+client/
+coverage/
+server/
+test/
+nm.*.tar

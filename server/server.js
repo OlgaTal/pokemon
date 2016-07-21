@@ -24,6 +24,7 @@ app.listen(port, () => {
   logger.log('info', '[EXPRESS] - listening port: %d', port);
 });
 
+app.use('/api/pokemon', require('./controllers/pokemons'));
 app.use('/things', require('./controllers/things'));
 
 app.get('*', (req, res) => {
